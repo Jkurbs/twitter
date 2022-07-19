@@ -14,7 +14,9 @@ struct TwitterApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            NavigationView {
+                SignUpView(authViewModel: AuthViewModel())
+            }
         }
     }
 }
