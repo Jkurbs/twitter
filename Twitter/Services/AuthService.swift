@@ -8,35 +8,32 @@
 import Foundation
 import FirebaseAuth
 
+// Test user for authentication
+/*
+ Email: user1@gmail.com
+ Password: 123456
+*/
+
 class AuthService {
-    
-    var provider = OAuthProvider(providerID: "twitter.com")
-    @Published var user: User?
     
     init() { }
     
-    func signIn() {
-        provider.getCredentialWith(nil) { credential, error in
+    func signUp(email: String, password: String, username: String, _ completion: @escaping (AuthDataResult?, Error?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error != nil {
-                // Handle error.
-                print("Error signIn in: ", error!.localizedDescription)
+                completion(nil, error)
             }
-            if credential != nil {
-                Auth.auth().signIn(with: credential!) { authResult, error in
-                    if error != nil {
-                        // Handle error.
-                    }
-                    print("Auth result: ", authResult!)
-                    // User is signed in.
-                    // IdP data available in authResult.additionalUserInfo.profile.
-                    // Twitter OAuth access token can also be retrieved by:
-                    // authResult.credential.accessToken
-                    // Twitter OAuth ID token can be retrieved by calling:
-                    // authResult.credential.idToken
-                    // Twitter OAuth secret can be retrieved by calling:
-                    // authResult.credential.secret
-                }
+            // TODO: - Save username to database
+            completion(authResult, nil)
+        }
+    }
+    
+    func signIn(email: String, password: String, _ completion: @escaping (AuthDataResult?, Error?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if error != nil {
+                completion(nil, error)
             }
+            completion(authResult, nil)
         }
     }
     
