@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+class AuthService {
+    
+    @Published var user: User?
+    
+    init() { }
+    
+    func logIn() {
+        
+    }
+}
