@@ -12,18 +12,16 @@ import FirebaseAuth
 /*
  Email: user1@gmail.com
  Password: 123456
-*/
+ */
 
 class AuthService {
-    
-    init() { }
     
     func signUp(email: String, password: String, username: String, _ completion: @escaping (AuthDataResult?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error != nil {
                 completion(nil, error)
             }
-            // TODO: - Save username to database
+            // TODO: - Save user data to database
             completion(authResult, nil)
         }
     }
@@ -37,12 +35,13 @@ class AuthService {
         }
     }
     
-    func signOut() {
+    func signOut(_ completion: @escaping (NSError?) -> Void) {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
+            completion(signOutError)
         }
     }
 }

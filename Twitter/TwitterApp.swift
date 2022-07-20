@@ -5,7 +5,9 @@
 //  Created by Kerby Jean on 7/19/22.
 //
 
+
 import SwiftUI
+import FirebaseAuth
 
 @main
 struct TwitterApp: App {
@@ -15,7 +17,11 @@ struct TwitterApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                SignUpView(authViewModel: AuthViewModel())
+                if Auth.auth().currentUser?.uid != nil {
+                    FeedView()
+                } else {
+                    SignUpView()
+                }
             }
         }
     }
