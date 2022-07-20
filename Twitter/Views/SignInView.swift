@@ -10,9 +10,11 @@ import SwiftUI
 struct SignInView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @ObservedObject var authViewModel: AuthViewModel
-    @State var emailAddress: String = ""
-    @State var password: String = ""
+    @ObservedObject var viewModel: SignInViewModel = SignInViewModel()
+    
+    @State var buttonDisabled: Bool = true
+    @State var buttonOpacity: Double = 0.5
+    @State var isLoading: Bool = false
     
     var body: some View {
         VStack {
@@ -21,7 +23,6 @@ struct SignInView: View {
             Spacer()
             CallToAction
             Spacer()
-                .navigationBarTitle("")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
         }
@@ -31,13 +32,13 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(authViewModel: AuthViewModel())
+        SignInView()
             .previewDevice("iPhone 13 Pro Max")
     }
 }
 
+// MARK: - Extension
 extension SignInView {
-    
     private var Header: some View {
         Image("logo")
             .resizable()
@@ -52,8 +53,8 @@ extension SignInView {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .frame(height: 150)
-            BottomBorderTextField(placeholder: "Email address", value: $authViewModel.emailAddress)
-            BottomBorderTextField(placeholder: "Password", value: $authViewModel.password)
+            BottomBorderTextField(placeholder: "Email address", value: $viewModel.emailAddress)
+            BottomBorderTextField(placeholder: "Password", value: $viewModel.password, isSecure: true)
         }.padding(.horizontal, 60)
             .padding(.top, 100)
     }
@@ -61,14 +62,22 @@ extension SignInView {
     private var CallToAction: some View {
         VStack {
             VStack {
-                BlackButton(title: "Sign In")
-                    .onTapGesture {
-                        // TODO: - change button opacity on tap
-                        //  authViewModel.signIn()
-                    }
+                NavigationLink(destination: FeedView(), isActive: $viewModel.navigationAllowed) {
+                    BlackButton(title: "Sign In", isLoading: isLoading)
+                        .opacity(buttonOpacity)
+                        .disabled(buttonDisabled)
+                        .onTapGesture {
+                            self.isLoading = true
+                            viewModel.signIn()
+                        }
+                        .onReceive(viewModel.submitAllowed) { submitAllowed in
+                            self.buttonDisabled = !submitAllowed
+                            self.buttonOpacity = submitAllowed ? 1.0 : 0.5
+                        }
+                }
             }
             Spacer()
-            NavigationLink(destination: SignInView(authViewModel: self.authViewModel)) {
+            NavigationLink(destination: SignUpView()) {
                 Text("Don't have an account? Create account")
                     .foregroundColor(Color.theme.secondary)
                     .font(.system(size: 13))

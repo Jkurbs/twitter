@@ -24,19 +24,23 @@ import SwiftUI
 ///
 /// - Parameters:
 ///   - title: The title of the button.
+///   - isLoading: Wheter or not the button is loading
 ///
-/// - Returns: A Button view of the given title.
+/// - Returns: A Button view with a title.
 ///
-@ViewBuilder func BlackButton(title: String) -> some View {
-    Button {
-    } label: {
-        Text(title)
+@ViewBuilder func BlackButton(title: String, isLoading: Bool = false) -> some View {
+    ZStack(alignment: .center) {
+        Text(isLoading ? "" : title)
             .foregroundColor(Color.theme.quaternaryLabel)
             .fontWeight(.bold)
+            .frame(width: 300, height: 60, alignment: .center)
+            .background(Color.black)
+            .cornerRadius(30)
+        if isLoading {
+            ProgressView()
+                .tint(.white)
+        }
     }
-    .frame(width: 300, height: 60, alignment: .center)
-    .background(Color.black)
-    .cornerRadius(30)
 }
 
 /// BottomBorderTextField with placehorder and value parameters.
@@ -47,11 +51,20 @@ import SwiftUI
 ///
 /// - Returns: A textfield with custom place holder and value.
 ///
-@ViewBuilder func BottomBorderTextField(placeholder: String, value: Binding<String>) -> some View {
+@ViewBuilder func BottomBorderTextField(placeholder: String, value: Binding<String>, isSecure: Bool = false) -> some View {
     VStack {
-        TextField(placeholder, text: value)
-            .textFieldStyle(.plain)
-            .frame(maxHeight: 55)
+        if isSecure {
+            SecureField(placeholder, text: value)
+                .textFieldStyle(.plain)
+                .frame(maxHeight: 55)
+                .disableAutocorrection(true)
+        } else {
+            TextField(placeholder, text: value)
+                .textFieldStyle(.plain)
+                .frame(maxHeight: 55)
+                .disableAutocorrection(true)
+        }
+        
         Separator(color: Color.theme.label)
     }
     .frame(height: 60)
