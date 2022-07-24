@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Tweet: Identifiable {
+struct Tweet: Identifiable, Equatable {
+    let id: Int
+    let content: String
+    let user: String
     
-    let id: String
-    let text: String
-    let userId: String
-    let profileImage: String
-    let timestamp: String
-    let likes: Int
+    var username: String {
+        user.components(separatedBy: " ").first?.lowercased() ?? "unkown"
+    }
 }

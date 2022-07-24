@@ -7,67 +7,61 @@
 
 import SwiftUI
 
-/// Separator with color parameter.
+/// Creates a separator with the provided color.
 ///
 /// - Parameters:
-///   - color: The color of the separator .
-///
-/// - Returns: A Separator view of the given color.
+///   - color: The color of the separator.
 ///
 @ViewBuilder func Separator(color: Color) -> some View {
     Rectangle()
-        .frame(maxWidth: .infinity, maxHeight: 0.5)
         .foregroundColor(color)
+        .frame(maxWidth: .infinity, maxHeight: 0.5)
 }
 
-/// Black button with title parameter.
+/// Creates a black button with the provided title.
 ///
 /// - Parameters:
 ///   - title: The title of the button.
-///   - isLoading: Wheter or not the button is loading
+///   - startLoading: Sets title to empty string and adds progressView to button.
 ///
-/// - Returns: A Button view with a title.
-///
-@ViewBuilder func BlackButton(title: String, isLoading: Bool = false) -> some View {
+@ViewBuilder func BlackButton(title: String, startLoading: Bool = false) -> some View {
     ZStack(alignment: .center) {
-        Text(isLoading ? "" : title)
+        Text(startLoading ? "" : title)
             .foregroundColor(Color.theme.quaternaryLabel)
             .fontWeight(.bold)
             .frame(width: 300, height: 60, alignment: .center)
             .background(Color.black)
             .cornerRadius(30)
-        if isLoading {
+        if startLoading {
             ProgressView()
                 .tint(.white)
         }
     }
+    .accessibility(addTraits: .isButton)
+    .accessibilityIdentifier("logIn")
 }
 
-/// BottomBorderTextField with placehorder and value parameters.
+/// Creates a  TextField with border bottom with the provided placehorder and value.
 ///
 /// - Parameters:
-///   - placeholder: The placeholder of the Textfield.
-///   - value: The value of the TextField
+///   - placeholder:The placeholder of the Textfield.
+///   - value: The value of the TextField.
 ///
-/// - Returns: A textfield with custom place holder and value.
-///
-@ViewBuilder func BottomBorderTextField(placeholder: String, value: Binding<String>, isSecure: Bool = false) -> some View {
+@ViewBuilder func BorderBottomTextField(placeholder: String, value: Binding<String>, isSecure: Bool = false) -> some View {
     VStack {
         if isSecure {
             SecureField(placeholder, text: value)
-                .textFieldStyle(.plain)
-                .frame(maxHeight: 55)
-                .disableAutocorrection(true)
         } else {
             TextField(placeholder, text: value)
-                .textFieldStyle(.plain)
-                .frame(maxHeight: 55)
-                .disableAutocorrection(true)
+                
         }
-        
         Separator(color: Color.theme.label)
     }
-    .frame(height: 60)
+    .accessibilityIdentifier(placeholder)
+    .textFieldStyle(.plain)
+    .disableAutocorrection(false)
+    .textInputAutocapitalization(.never)
+    .frame(maxHeight: 60)
 }
 
 

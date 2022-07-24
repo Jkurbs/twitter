@@ -7,8 +7,9 @@ target 'Twitter' do
 
   # Pods for Twitter
 
-  pod 'FirebaseAuth'
-
+  pod 'ReactiveKit'
+  pod 'Quick'
+  pod 'Nimble'
 
   target 'TwitterTests' do
     inherit! :search_paths

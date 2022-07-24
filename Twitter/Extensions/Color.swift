@@ -6,11 +6,7 @@
 //
 
 import SwiftUI
-
-// Color schemes reference
-/*
- https://usbrandcolors.com/twitter-colors/
-*/
+import Foundation
 
 extension Color {
     static let theme = ColorTheme()

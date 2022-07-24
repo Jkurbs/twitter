@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-import FirebaseAuth
 
 @main
 struct TwitterApp: App {
@@ -17,10 +16,10 @@ struct TwitterApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                if Auth.auth().currentUser?.uid != nil {
-                    FeedView()
+                if TwitterClient.shared.isLoggedIn.value {
+                    TimelineView(authViewModel: AuthViewModel())
                 } else {
-                    SignUpView()
+                    LogInView()
                 }
             }
         }
