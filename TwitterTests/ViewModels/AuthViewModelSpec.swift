@@ -13,18 +13,18 @@ class AuthTests: XCTestCase {
 
     fileprivate var sut: MockAuthViewModel!
     var expectedTime: Double!
-
+    
+    func testLogIn_called() {
+        sut.logIn()
+        XCTAssertTrue(sut.startLoading)
+    }
+    
     func testLogIn_Allowed() {
         sut.username = generateRandomCredential()
         sut.password = generateRandomCredential()
         XCTAssertEqual(sut.username.count > 3 &&
                        sut.password.count > 4,
                        sut.loginEnabled)
-    }
-
-    func testLogIn_called() {
-        sut.logIn()
-        XCTAssertTrue(sut.startLoading)
     }
 
     func testLogIn_succeeded() {

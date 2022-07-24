@@ -20,6 +20,7 @@
 		6D89CCDF288714E200C5F162 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89CCDE288714E200C5F162 /* Color.swift */; };
 		6D89CCE42887211100C5F162 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89CCE32887211100C5F162 /* AppDelegate.swift */; };
 		6D8D9AFC288D98D6000DB54E /* TwitterClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D9AFB288D98D6000DB54E /* TwitterClientSpec.swift */; };
+		6D8D9AFF288DFDF1000DB54E /* LoginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D9AFE288DFDF1000DB54E /* LoginUITests.swift */; };
 		6DC1280F288A6ACD00408BC9 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC1280E288A6ACD00408BC9 /* View.swift */; };
 		6DC12811288A6B9100408BC9 /* LocalizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC12810288A6B9100408BC9 /* LocalizedError.swift */; };
 		6DE9979D2887519C000D3B7F /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE9979C2887519C000D3B7F /* LogInView.swift */; };
@@ -67,6 +68,7 @@
 		6D89CCE028871CA200C5F162 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D89CCE32887211100C5F162 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D8D9AFB288D98D6000DB54E /* TwitterClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterClientSpec.swift; sourceTree = "<group>"; };
+		6D8D9AFE288DFDF1000DB54E /* LoginUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUITests.swift; sourceTree = "<group>"; };
 		6DC1280E288A6ACD00408BC9 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		6DC12810288A6B9100408BC9 /* LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedError.swift; sourceTree = "<group>"; };
 		6DE9979C2887519C000D3B7F /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		6D89CCB42886FEFF00C5F162 /* TwitterUITests */ = {
 			isa = PBXGroup;
 			children = (
+				6D8D9AFE288DFDF1000DB54E /* LoginUITests.swift */,
 				6D89CCB72886FEFF00C5F162 /* TwitterUITestsLaunchTests.swift */,
 			);
 			path = TwitterUITests;
@@ -543,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D89CCB82886FEFF00C5F162 /* TwitterUITestsLaunchTests.swift in Sources */,
+				6D8D9AFF288DFDF1000DB54E /* LoginUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
