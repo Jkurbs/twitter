@@ -25,7 +25,7 @@ class AuthViewModel: ObservableObject {
         }
         .eraseToAnyPublisher()
     }
-    
+
     init() {
         validateCredentials.sink {[weak self] credentialsValidated in
             guard let self = self else { return }

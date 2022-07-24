@@ -1,31 +1,37 @@
 //
-//  TimelineViewModelSpec.swift
+//  FeedTests.swift
 //  TwitterTests
 //
 //  Created by Kerby Jean on 7/19/22.
 //
 
-import Quick
-import Nimble
+import XCTest
 @testable import Twitter
 
-class TimelineViewModelSpec: QuickSpec {}
-
-// MARK: - Tests
-extension TimelineViewModelSpec {
-    override func spec() {
-        
-        var subject: TimelineViewModel!
-        beforeEach { subject = .init() }
-
-        describe("loadTimeline()") {
-            context("When load timeline is called tweets are no longer nil") {
-                beforeEach { subject.loadTimeline() }
-                it("sets tweets") {
-                    expect(subject.tweets).toEventuallyNot(beNil(), timeout: .seconds(Int(1.5)))
-                }
-            }
-        }
+class TimelineTests: XCTestCase {
+    
+    fileprivate var sut: TimelineViewModel!
+    let expectedTime = 1.5
+    
+    override func setUpWithError() throws {
+        self.sut = TimelineViewModel()
+    }
+    
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func testInit_createsTimelineViewModel() {
+        XCTAssertNotNil(TimelineViewModel())
+    }
+    
+    func testInit_setsTweetsVariable() {
+        let expectation = expectation(description: "Waiting for deadline")
+        DispatchQueue.main.asyncAfter(deadline: .now() + expectedTime, execute: {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: expectedTime)
+        XCTAssertNotNil(sut.tweets)
     }
 }
 
