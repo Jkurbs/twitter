@@ -1,0 +1,24 @@
+PODS:
+  - Nimble (10.0.0)
+  - Quick (5.0.1)
+  - ReactiveKit (3.19.1)
+
+DEPENDENCIES:
+  - Nimble
+  - Quick
+  - ReactiveKit
+
+SPEC REPOS:
+  trunk:
+    - Nimble
+    - Quick
+    - ReactiveKit
+
+SPEC CHECKSUMS:
+  Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
+  Quick: 749aa754fd1e7d984f2000fe051e18a3a9809179
+  ReactiveKit: a36ebeb959fe6852dd674cc423163bfffb7e0541
+
+PODFILE CHECKSUM: c9626bb6e3d085300badab04611611c28ca2bf42
+
+COCOAPODS: 1.11.3
